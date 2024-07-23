@@ -8,7 +8,7 @@ public class TicTacToe {
 	public static final char PLAYER_2 = 'O';
 	static char[][] grid = { { '\0', '\0', '\0' }, { '\0', '\0', '\0' }, { '\0', '\0', '\0' } };
 	static int turn = 1;
-	static char[] xy = { '\0', '\0' };
+	static int[] xy = { -1, -1 };
 	static char player = '\0';
 	static boolean isPlayerWin = false;
 
@@ -24,7 +24,12 @@ public class TicTacToe {
 
 	// TODO ZEDOUN
 	public static void displayGrid() {
-
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid.length; j++) {
+				System.out.print(grid[i][j] + " |");
+			}
+			System.out.println();
+		}
 	}
 
 	// TODO ZEDOUN
@@ -33,7 +38,7 @@ public class TicTacToe {
 	}
 
 	// TODO JEROME
-	public static char[][] chooseCase(char[][] grid, char player) {
+	public static void chooseCase() {
 		Scanner scan = new Scanner(System.in);
 
 		boolean validInput = false;
@@ -70,18 +75,14 @@ public class TicTacToe {
 				ord -= 1;
 
 				validInput = true;
-
-				for (int i = 1; i <= grid.length; i++) {
-					for (int j = 1; j <= grid.length; j++) {
-						System.out.println("hello2 " + i + " " + j + " " + abs + " " + ord);
-						if (i == abs && j == ord) {
-							System.out.println(grid[i][j] + "grid");
-							grid[i][j] = player;
-							System.out.println("hello");
-						}
-					}
-				}
-
+				/*
+				 * for (int i = 1; i <= grid.length; i++) { for (int j = 1; j <= grid.length;
+				 * j++) { System.out.println("hello2 " + i + " " + j + " " + abs + " " + ord);
+				 * if (i == abs && j == ord) { System.out.println(grid[i][j] + "grid");
+				 * grid[i][j] = player; System.out.println("hello"); } } }
+				 */
+				xy[0] = abs;
+				xy[1] = ord;
 			} catch (InputMismatchException e) {
 				System.out.println("Entrée invalide. Veuillez entrer des chiffres seulement.");
 				scan.next();
@@ -89,9 +90,7 @@ public class TicTacToe {
 
 		}
 
-		scan.close();
-		return grid;
-
+		// scan.close();
 	}
 
 	// TODO ALICIA
@@ -120,16 +119,17 @@ public class TicTacToe {
 
 	// TODO ALICIA
 	public static void fillCase() throws Exception {
-		int x = -1;
-		int y = Integer.parseInt(String.valueOf(xy[1])) - 1;
+		int x = xy[0];
+		int y = xy[1];
+		// int y = Integer.parseInt(String.valueOf(xy[1])) - 1;
 
-		if (xy[0] == 'A') {
-			x = 0;
-		} else if (xy[0] == 'B') {
-			x = 1;
-		} else if (xy[0] == 'C') {
-			x = 2;
-		}
+//		if (xy[0] == 'A') {
+//			x = 0;
+//		} else if (xy[0] == 'B') {
+//			x = 1;
+//		} else if (xy[0] == 'C') {
+//			x = 2;
+//		}
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid.length; j++) {
 				if (x == j && y == i && grid[i][j] == '\0') {
@@ -138,7 +138,7 @@ public class TicTacToe {
 				}
 			}
 		}
-		throw new Exception("La case aux coordonnées (" + xy[0] + ", " + xy[1] + ") est déjà occupée.");
+		throw new Exception("La case aux coordonnées (" + (xy[0]+1) + ", " + (xy[1]+1) + ") est déjà occupée.");
 	}
 
 	// TODO ALICIA
@@ -150,7 +150,7 @@ public class TicTacToe {
 				System.out.println("\nTour: " + turn);
 				System.out.println("C'est au tour du joueur " + player + " de jouer.");
 				// en mode test valeur fixe avec x = A et y = 2
-				xy = chooseCase('A', '2');
+				chooseCase();
 				fillCase();
 				turn++;
 			} catch (Exception e) {
