@@ -4,6 +4,17 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TicTacToe {
+	public static final String[] RULES = { "Bienvenue au jeu de Tic Tac Toe!", "Voici les règles du jeu :",
+			"1. Le jeu se joue sur une grille de 3x3 cases.",
+			"2. Deux joueurs jouent à tour de rôle, l'un avec le symbole 'X' et l'autre avec le symbole 'O'.",
+			"3. Le premier joueur à aligner trois de ses symboles horizontalement, verticalement ou en diagonale gagne la partie.",
+			"4. Si toutes les cases sont remplies et qu'aucun joueur n'a aligné trois symboles, la partie est déclarée nulle.",
+			"5. Pour jouer, entrez le numéro de la case où vous souhaitez placer votre symbole.", "Amusez-vous bien!" };
+	public static final String[] WELCOMES = { "  _____ _        _____            _____          ",
+			" |_   _(_)      |_   _|          |_   _|         ", "   | |  _  ___    | | __ _  ___    | | ___   ___ ",
+			"   | | | |/ __|   | |/ _` |/ __|   | |/ _ \\ / _ \\", "   | | | | (__    | | (_| | (__    | | (_) |  __/",
+			"   \\_/ |_|\\___|   \\_/\\__,_|\\___|   \\_/\\___/ \\___|",
+			"                                                 ", };
 	public static final char PLAYER_1 = 'X';
 	public static final char PLAYER_2 = 'O';
 	static char[][] grid = { { '\0', '\0', '\0' }, { '\0', '\0', '\0' }, { '\0', '\0', '\0' } };
@@ -14,32 +25,50 @@ public class TicTacToe {
 
 	// TODO JEROME
 	public static void displayGameOver() {
-		System.out.println(" GAME OVER ");
+		System.out.println();
+		if (isPlayerWin) {
+			System.out
+					.println("Félicitations ! Le joueur " + player + " a gagné !");
+		} else {
+			System.out.println("Match nul ! Personne n'a gagné.");
+		}
 	}
 
 	// TODO
 	public static void displayRules() {
-
+		for (String rule : RULES) {
+			System.out.println(rule);
+		}
+		System.out.println();
 	}
 
 	// TODO ZEDOUN
 	public static void displayGrid() {
-		char[][] grid = { { 'x', 'X', 'o' }, { 'x', 'X', 'o' }, { 'x', 'O', 'X' } };
-		for (int i = 0; i < 3; i++) {
-			if (i > 0) {
-				System.out.println("---+---+---");
+		for (int i = 0; i < 4; i++) {
+			if (i == 0) {
+				System.out.print(" " + '\0' + " ");
+			} else {
+				System.out.print(" " + i + "  ");
 			}
-			for (int j = 0; j < 3; j++) {
+		}
+		System.out.println();
+		for (int i = 0; i < grid.length; i++) {
+
+			if (i != 0) {
+				System.out.println("   ---+---+---");
+			}
+			for (int j = 0; j < grid.length; j++) {
+				if (j == 0) {
+					System.out.print(" " + (i + 1) + " ");
+				}
 				if (j < 2) {
 					System.out.print(" " + grid[i][j] + " |");
 				} else {
-					System.out.println(" " + grid[i][j]);
+					System.out.print(" " + grid[i][j]);
 				}
-
 			}
 			System.out.println();
 		}
-
 	}
 
 	// TODO ZEDOUN
@@ -47,6 +76,9 @@ public class TicTacToe {
 
 		System.out.println("* welcome to MORPION ");
 		System.out.println(" bienvenu à Morpion *");
+		for (String welcome : WELCOMES) {
+			System.out.println(welcome);
+		}
 
 	}
 
@@ -88,7 +120,7 @@ public class TicTacToe {
 				ord -= 1;
 
 				validInput = true;
-			
+
 				xy[0] = abs;
 				xy[1] = ord;
 			} catch (InputMismatchException e) {
