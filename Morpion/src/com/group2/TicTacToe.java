@@ -12,9 +12,9 @@ public class TicTacToe {
 	static char player = '\0';
 	static boolean isPlayerWin = false;
 
-	// TODO
+	// TODO JEROME
 	public static void displayGameOver() {
-
+		System.out.println(" GAME OVER ");
 	}
 
 	// TODO
@@ -24,16 +24,29 @@ public class TicTacToe {
 
 	// TODO ZEDOUN
 	public static void displayGrid() {
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid.length; j++) {
-				System.out.print(grid[i][j] + " |");
+		char[][] grid = { { 'x', 'X', 'o' }, { 'x', 'X', 'o' }, { 'x', 'O', 'X' } };
+		for (int i = 0; i < 3; i++) {
+			if (i > 0) {
+				System.out.println("---+---+---");
+			}
+			for (int j = 0; j < 3; j++) {
+				if (j < 2) {
+					System.out.print(" " + grid[i][j] + " |");
+				} else {
+					System.out.println(" " + grid[i][j]);
+				}
+
 			}
 			System.out.println();
 		}
+
 	}
 
 	// TODO ZEDOUN
 	public static void displayWelcome() {
+
+		System.out.println("* welcome to MORPION ");
+		System.out.println(" bienvenu à Morpion *");
 
 	}
 
@@ -75,12 +88,7 @@ public class TicTacToe {
 				ord -= 1;
 
 				validInput = true;
-				/*
-				 * for (int i = 1; i <= grid.length; i++) { for (int j = 1; j <= grid.length;
-				 * j++) { System.out.println("hello2 " + i + " " + j + " " + abs + " " + ord);
-				 * if (i == abs && j == ord) { System.out.println(grid[i][j] + "grid");
-				 * grid[i][j] = player; System.out.println("hello"); } } }
-				 */
+			
 				xy[0] = abs;
 				xy[1] = ord;
 			} catch (InputMismatchException e) {
@@ -90,7 +98,6 @@ public class TicTacToe {
 
 		}
 
-		// scan.close();
 	}
 
 	// TODO ALICIA
@@ -138,7 +145,7 @@ public class TicTacToe {
 				}
 			}
 		}
-		throw new Exception("La case aux coordonnées (" + (xy[0]+1) + ", " + (xy[1]+1) + ") est déjà occupée.");
+		throw new Exception("La case aux coordonnées (" + (xy[0] + 1) + ", " + (xy[1] + 1) + ") est déjà occupée.");
 	}
 
 	// TODO ALICIA
