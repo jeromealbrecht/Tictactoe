@@ -4,7 +4,7 @@ public class TestTicTacToe {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TicTacToe.displayGrid();
+//		TicTacToe.displayGrid();
 		TicTacToe.play2player();
 	}
 

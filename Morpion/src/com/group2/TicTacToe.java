@@ -23,8 +23,8 @@ public class TicTacToe {
 	}
 
 	// TODO ZEDOUN
-	public static void displayGrid() {
-		char[][] grid = { { 'x', 'X', 'o' }, { 'x', 'X', 'o' }, { 'x', 'O', 'X' } };
+	public static void displayGrid(char[][] grid) {
+
 		for (int i = 0; i < 3; i++) {
 			if (i > 0) {
 				System.out.println("---+---+---");
@@ -178,7 +178,7 @@ public class TicTacToe {
 			if (turn >= 5) {
 				isPlayerWin = checkWin();
 			}
-			displayGrid();
+			displayGrid(grid);
 		}
 		displayGameOver();
 	}
