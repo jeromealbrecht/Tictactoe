@@ -210,7 +210,7 @@ public class TicTacToe {
 			if (turn >= 5) {
 				isPlayerWin = checkWin();
 			}
-			displayGrid(grid);
+			displayGrid();
 		}
 		displayGameOver();
 	}
